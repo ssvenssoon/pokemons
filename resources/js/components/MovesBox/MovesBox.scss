@@ -1,0 +1,39 @@
+.moves-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .go-back-btn {
+    margin: auto;
+    background-color: #30a87a;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  .moves-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 25px;
+    margin: 40px;
+    .moves {
+      background-color: #3078a8;
+      color: #fff;
+      font-size: 22px;
+      border-radius: 20px;
+      padding: 15px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+}

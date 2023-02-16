@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .fight-ground {
+    background-image: url("../images/pokemon-fight-ground.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 70%;
+    height: 600px;
+    z-index: 10;
+    margin-top: -200px;
+    .sprites {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: rgb(50, 127, 194);
+      height: 100%;
+      width: 100%;
+      position: relative;
+    }
+    .fighting-box-container {
+      background-color: #fff;
+      display: grid;
+      grid-template-columns: auto auto;
+      width: 100%;
+    }
+  }
+}

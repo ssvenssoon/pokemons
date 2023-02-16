@@ -1,0 +1,73 @@
+.fighting-box {
+  width: 60%;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 30px;
+  margin: 20px;
+  margin-left: 50px;
+  div {
+    padding: 20px;
+    cursor: pointer;
+    p {
+      color: #fff;
+      text-align: center;
+      font-size: 24px;
+    }
+  }
+  .fighting {
+    background-color: rgb(221, 122, 132);
+    width: 200px;
+    border-radius: 20px;
+    &:hover {
+      opacity: 0.8;
+    }
+    p {
+      text-shadow: 2px 2px 1px black;
+      &:nth-child(2) {
+        font-size: 14px;
+      }
+    }
+  }
+  .bag {
+    background-color: #a87830;
+    width: 200px;
+    border-radius: 20px;
+    &:hover {
+      opacity: 0.8;
+    }
+    p {
+      text-shadow: 2px 2px 1px black;
+      &:nth-child(2) {
+        font-size: 14px;
+      }
+    }
+  }
+  .pokemon {
+    background-color: #58b028;
+    width: 200px;
+    border-radius: 20px;
+    &:hover {
+      opacity: 0.8;
+    }
+    p {
+      text-shadow: 2px 2px 1px black;
+      &:nth-child(2) {
+        font-size: 14px;
+      }
+    }
+  }
+  .run {
+    background-color: #3078a8;
+    width: 200px;
+    border-radius: 20px;
+    &:hover {
+      opacity: 0.8;
+    }
+    p {
+      text-shadow: 2px 2px 1px black;
+      &:nth-child(2) {
+        font-size: 14px;
+      }
+    }
+  }
+}
