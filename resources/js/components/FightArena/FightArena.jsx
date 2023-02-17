@@ -24,6 +24,20 @@ const FightArena = () => {
   //     })
   // }
 
+  const getClickedMove = (moveName, power) => {
+    const newHealth = oppositePokemon.health - power
+    console.log(oppositePokemon.health - power)
+
+    console.log(newHealth)
+    axios
+      .put(`api/pokemon/${oppositePokemon.id}`, {
+        damage: newHealth,
+      })
+      .then((response) => {
+        console.log(response)
+      })
+  }
+
   const handleClickFighting = (frontSprite) => {
     setIsFightClicked(!isFightClicked)
     setMoves(frontSprite.moves)
@@ -51,7 +65,11 @@ const FightArena = () => {
         <div className="fighting-box-container">
           {isFightClicked ? (
             <>
-              <MovesBox moves={moves} setIsFightClicked={setIsFightClicked} />
+              <MovesBox
+                getClickedMove={getClickedMove}
+                moves={moves}
+                setIsFightClicked={setIsFightClicked}
+              />
             </>
           ) : (
             <>

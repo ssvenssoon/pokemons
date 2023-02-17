@@ -18,7 +18,6 @@ class PokemonController extends Controller
 
     public function store(Request $request)
     {
-        Log::alert($request);
         $pokemon = new Pokemon();
         $pokemon->name = $request->name;
         $pokemon->basestats = $request->stats;
@@ -26,5 +25,12 @@ class PokemonController extends Controller
         $pokemon->sprite_from_front = $request->sprite_from_front;
         $pokemon->sprite_from_back = $request->sprite_from_back;
         $pokemon->save();
+    }
+    public function update(Request $request, $id)
+    {
+        Pokemon::where('id', $id)
+            ->update(['health' => $request->damage]);
+        Log::alert($id);
+        Log::alert($request);
     }
 }
