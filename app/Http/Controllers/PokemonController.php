@@ -30,7 +30,5 @@ class PokemonController extends Controller
     {
         Pokemon::where('id', $id)
             ->update(['health' => $request->damage]);
-        Log::alert($id);
-        Log::alert($request);
     }
 }

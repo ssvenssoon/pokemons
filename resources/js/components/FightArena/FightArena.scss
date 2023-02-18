@@ -14,6 +14,7 @@
     height: 330px;
     z-index: 10;
     margin-top: -245px;
+    position: relative;
     .sprites {
       display: flex;
       justify-content: center;
@@ -36,7 +37,7 @@
   .container {
     .fight-ground {
       width: 80%;
-      height: 390px;
+      height: 330px;
       margin-top: -240px;
     }
   }
@@ -44,8 +45,8 @@
 @media screen and (min-width: 950px) {
   .container {
     .fight-ground {
-      height: 500px;
-      z-index: 10;
+      width: 80%;
+      height: 330px;
       margin-top: -240px;
     }
   }

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react"
 import "./PokemonsInBattle.scss"
 
-const PokemonsInBattle = ({ yourPokemon, oppositePokemon }) => {
+const PokemonsInBattle = ({
+  yourPokemon,
+  oppositePokemon,
+  oppositePokemonHealth,
+}) => {
   return (
     <>
       <div className="your-pokemon-health">
@@ -13,7 +17,7 @@ const PokemonsInBattle = ({ yourPokemon, oppositePokemon }) => {
         alt=""
       />
       <div className="opponent-pokemon-health">
-        <h3>HP: {oppositePokemon?.health}</h3>
+        <h3>HP: {oppositePokemonHealth ?? oppositePokemon?.health}</h3>
       </div>
       <img
         className="sprite-from-back"

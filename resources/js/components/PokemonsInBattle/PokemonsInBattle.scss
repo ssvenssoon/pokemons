@@ -14,9 +14,9 @@
 }
 .sprite-from-front {
   position: absolute;
-  bottom: 3%;
+  bottom: 0%;
   left: 17%;
-  width: 250px;
+  width: 200px;
   z-index: 1;
 }
 .opponent-pokemon-health {
@@ -35,7 +35,7 @@
 .sprite-from-back {
   position: absolute;
   right: 22%;
-  top: 16%;
-  width: 250px;
+  top: 10%;
+  width: 200px;
   z-index: 1;
 }

@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react"
 import "./MovesBox.scss"
 
-const MovesBox = ({ moves, setIsFightClicked, getClickedMove }) => {
+const MovesBox = ({
+  moves,
+  setIsFightClicked,
+  updateOppositionHealth,
+  win,
+}) => {
   return (
     <>
       <div className="moves-box">
@@ -13,13 +18,14 @@ const MovesBox = ({ moves, setIsFightClicked, getClickedMove }) => {
         </button>
         <div className="moves-container">
           {moves.map((item) => (
-            <div
-              onClick={(e) => getClickedMove(item.name, item.power)}
+            <button
+              disabled={win}
+              onClick={(e) => updateOppositionHealth(item.name, item.power)}
               className="moves"
               key={item.id}
             >
               {item.name}
-            </div>
+            </button>
           ))}
         </div>
       </div>
