@@ -6,11 +6,14 @@ const MovesBox = ({
   setIsFightClicked,
   updateOppositionHealth,
   win,
+  oppositionMakesAMove,
+  lost,
 }) => {
   return (
     <>
       <div className="moves-box">
         <button
+          disabled={oppositionMakesAMove}
           className="go-back-btn"
           onClick={() => setIsFightClicked(false)}
         >
@@ -19,7 +22,7 @@ const MovesBox = ({
         <div className="moves-container">
           {moves.map((item) => (
             <button
-              disabled={win}
+              disabled={win || lost || oppositionMakesAMove}
               onClick={(e) => updateOppositionHealth(item.name, item.power)}
               className="moves"
               key={item.id}

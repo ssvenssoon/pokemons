@@ -1,10 +1,26 @@
 import React, { useState, useEffect } from "react"
 import FightArena from "./components/FightArena/FightArena"
 import ReactDOM from "react-dom"
+import StartScreen from "./components/StartScreen/StartScreen"
 import "./App.scss"
 
 const App = () => {
-  return <FightArena />
+  const [isFightStarted, setIsFightStarted] = useState(false)
+
+  return (
+    <>
+      {!isFightStarted ? (
+        <div className="container">
+          <StartScreen
+            setIsFightStarted={setIsFightStarted}
+            isFightStarted={isFightStarted}
+          />
+        </div>
+      ) : (
+        <FightArena setIsFightStarted={setIsFightStarted} />
+      )}
+    </>
+  )
 }
 
 export default App
