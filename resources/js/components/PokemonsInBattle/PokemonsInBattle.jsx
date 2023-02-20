@@ -6,6 +6,7 @@ const PokemonsInBattle = ({
   oppositePokemon,
   oppositePokemonHealth,
 }) => {
+  console.log(yourPokemon)
   return (
     <>
       <div className="your-pokemon-health">

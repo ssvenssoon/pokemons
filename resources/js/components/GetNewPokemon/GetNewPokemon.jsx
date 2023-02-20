@@ -14,6 +14,21 @@ const GetNewPokemon = () => {
       .get(`https://pokeapi.co/api/v2/pokemon/${lowerCasePokemon}`)
       .then((response) => {
         setPokemonData(response.data)
+
+        axios
+          .post(`api/pokemon`, {
+            name: response.data.name,
+            moves: response.data.moves,
+            sprite_from_front: response.data.sprites.front_default,
+            sprite_from_back: response.data.sprites.back_default,
+            stats: response.data.stats[0].base_stat,
+          })
+          .then((response) => {
+            console.log(response)
+          })
+          .catch((error) => {
+            console.error(error)
+          })
       })
       .catch((error) => {
         console.error(error)
@@ -21,6 +36,7 @@ const GetNewPokemon = () => {
       })
   }
 
+  console.log(pokemonData)
   return (
     <div className="get-pokemon-container">
       <form onSubmit={handleSubmit}>

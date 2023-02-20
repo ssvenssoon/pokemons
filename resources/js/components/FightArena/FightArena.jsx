@@ -75,7 +75,9 @@ const FightArena = ({ setIsFightStarted }) => {
 
   const handleClickFighting = (frontSprite) => {
     setIsFightClicked(!isFightClicked)
-    setMoves(frontSprite.moves)
+    const shuffledMoves = frontSprite.moves.sort(() => 0.5 - Math.random())
+    const randomMoves = shuffledMoves.slice(0, 4)
+    setMoves(randomMoves)
   }
 
   useEffect(() => {
