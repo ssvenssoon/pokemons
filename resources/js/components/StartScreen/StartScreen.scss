@@ -1,14 +1,24 @@
-.new-fight-btn {
-  padding: 30px;
-  background-color: rgb(55, 199, 55);
-  border: none;
-  border-radius: 20px;
-  font-size: 25px;
-  cursor: pointer;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #fff;
-  &:hover {
-    opacity: 0.8;
+.home-screen-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  h1 {
+    color: #fff;
+  }
+  gap: 30px;
+  .new-fight-btn {
+    padding: 30px;
+    background-color: rgb(55, 199, 55);
+    border: none;
+    border-radius: 20px;
+    font-size: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }
