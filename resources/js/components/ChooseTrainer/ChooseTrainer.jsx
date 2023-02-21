@@ -22,17 +22,19 @@ const ChooseTrainer = ({ setIsChooseTrainerClicked, handleClickedTrainer }) => {
         <ul className="trainers-ul">
           {trainers?.map((item) => {
             return (
-              <>
-                <div onClick={() => handleClickedTrainer(item)}>
-                  <img
-                    className="trainers-profile-pic"
-                    src={item.profile_pic}
-                    alt={item.name + "-image"}
-                  />
-                  <li className="trainers-list-item">{"Name: " + item.name}</li>
-                  <li className="trainers-list-item">{"Age: " + item.age}</li>
-                </div>
-              </>
+              <div
+                className="trainers-container"
+                key={item.id}
+                onClick={() => handleClickedTrainer(item)}
+              >
+                <img
+                  className="trainers-profile-pic"
+                  src={item.profile_pic}
+                  alt={item.name + "-image"}
+                />
+                <li className="trainers-list-item">{"Name: " + item.name}</li>
+                <li className="trainers-list-item">{"Age: " + item.age}</li>
+              </div>
             )
           })}
         </ul>

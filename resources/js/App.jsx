@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import FightArena from "./components/FightArena/FightArena"
-import ReactDOM from "react-dom"
 import StartScreen from "./components/StartScreen/StartScreen"
 import GetNewPokemon from "./components/GetNewPokemon/GetNewPokemon"
 import ChooseTrainer from "./components/ChooseTrainer/ChooseTrainer"

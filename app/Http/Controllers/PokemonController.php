@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Move;
 use App\Models\Pokemon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Cache;
 
 class PokemonController extends Controller
@@ -30,11 +30,8 @@ class PokemonController extends Controller
         $doesPokemonExist = Pokemon::where('name', $pokemon)->first();
 
         if ($doesPokemonExist) {
-            // The pokemon exists, return the script
             return;
         } else {
-            // If not:
-            // create new Pokemon instance
             $newPokemon = new Pokemon();
             $newPokemon->name = $pokemon;
             $newPokemon->sprite_from_front = $sprite_from_front;
@@ -42,44 +39,41 @@ class PokemonController extends Controller
             $newPokemon->basestats = $stats;
             $newPokemon->level = 1;
             $newPokemon->health = 100;
-            // dd($newPokemon);
 
-            // save new Pokemon instance to database
             $newPokemon->save();
 
-            // add moves to Pokemon instance
+            // Create new Guzzle client instance
+            $client = new Client();
+
+
             foreach ($moves as $move) {
                 $moveName = $move['move']['name'];
                 $moveUrl = $move['move']['url'];
 
-                // check if move data is already cached
+                // Check if move data is already cached
                 $moveApiResponse = Cache::get($moveUrl);
 
                 if (!$moveApiResponse) {
-                    // fetch move data
-                    $moveApiResponse = file_get_contents($moveUrl);
+                    $response = $client->get($moveUrl);
+                    $moveApiResponse = $response->getBody()->getContents();
 
-                    // cache move data for future requests
+                    // Cache move data for future requests
                     Cache::put($moveUrl, $moveApiResponse, now()->addHours(24));
                 }
 
-                $decodedApiResponse = json_decode($moveApiResponse);
+                $decodedApiResponse = json_decode($moveApiResponse, true);
 
                 $existingMove = Move::where('name', $moveName)->first();
 
                 if ($existingMove) {
-                    // Move already exists in the database
                     $newMove = $existingMove;
                 } else {
-                    // create new Move instance
                     $newMove = new Move();
                     $newMove->name = $moveName;
-                    $newMove->power = $decodedApiResponse->power ?? 40;
+                    $newMove->power = $decodedApiResponse['power'] ?? 40;
 
-                    // save new Move instance to database
                     $newMove->save();
                 }
-                // add Move instance to Pokemon instance
                 $newPokemon->moves()->attach($newMove->id);
             }
         }
