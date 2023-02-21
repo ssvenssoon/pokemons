@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MoveController;
 use App\Http\Controllers\PokemonController;
+use App\Http\Controllers\TrainerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,3 +28,5 @@ Route::get('/pokemon', [PokemonController::class, 'index']);
 Route::put('/pokemon/{id}', [PokemonController::class, 'update']);
 
 Route::post('/moves', [MoveController::class, 'store']);
+
+Route::get('/trainers', [TrainerController::class, 'index']);

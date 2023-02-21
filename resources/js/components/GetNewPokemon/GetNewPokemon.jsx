@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import "./GetNewPokemon.scss"
 
-const GetNewPokemon = () => {
+const GetNewPokemon = ({ setIsGetPokemonClicked }) => {
   const [pokemonName, setPokemonName] = useState("")
   const [pokemonData, setPokemonData] = useState(null)
 
@@ -36,9 +36,14 @@ const GetNewPokemon = () => {
       })
   }
 
-  console.log(pokemonData)
   return (
     <div className="get-pokemon-container">
+      <button
+        onClick={() => setIsGetPokemonClicked(false)}
+        className="back-to-start-screen-btn"
+      >
+        Back to start screen
+      </button>
       <form onSubmit={handleSubmit}>
         <label>
           Enter pokémon name:

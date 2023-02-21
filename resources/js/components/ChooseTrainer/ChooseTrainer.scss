@@ -1,0 +1,38 @@
+.choose-pokemon-container {
+  .back-to-start-screen-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px;
+    font-size: 17px;
+    border: none;
+    background-color: #58b028;
+    color: #fff;
+    font-weight: bold;
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
+  }
+
+  .trainers-ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    div {
+      cursor: pointer;
+      .trainers-profile-pic {
+        width: 250px;
+        height: 200px;
+        margin-top: 20px;
+      }
+      .trainers-list-item {
+        list-style: none;
+        color: #fff;
+        font-size: 24px;
+      }
+    }
+  }
+}

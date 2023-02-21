@@ -5,7 +5,7 @@ import PokemonsInBattle from "../PokemonsInBattle/PokemonsInBattle"
 import FightEventsModal from "../FightEventsModal/FightEventsModal"
 import "./FightArena.scss"
 
-const FightArena = ({ setIsFightStarted }) => {
+const FightArena = ({ setIsFightStarted, yourSelectedPokemon }) => {
   const [yourPokemon, setYourPokemon] = useState(null)
   const [oppositePokemon, setOppositePokemon] = useState(null)
   const [newFight, setNewFight] = useState(false)
@@ -16,6 +16,7 @@ const FightArena = ({ setIsFightStarted }) => {
   const [oppositionMakesAMove, setOppositionMakesAMove] = useState(false)
   const [oppositionMadeAMove, setOppositionMadeAMove] = useState(false)
   const [oppositePokemonHealth, setOppositePokemonHealth] = useState(null)
+  console.log(yourSelectedPokemon)
 
   const getOppositionRandomMove = (moves) => {
     const randomIndex = Math.floor(Math.random() * moves.length)
