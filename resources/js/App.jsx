@@ -9,10 +9,10 @@ const App = () => {
   const [isFightStarted, setIsFightStarted] = useState(false)
   const [isGetPokemonClicked, setIsGetPokemonClicked] = useState(false)
   const [isGetChooseTrainerClicked, setIsChooseTrainerClicked] = useState(false)
-  const [yourSelectedPokemon, setYourSelectedPokemon] = useState(false)
+  const [yourSelectedTrainer, setYourSelectedTrainer] = useState(false)
 
   const handleClickedTrainer = (trainer) => {
-    setYourSelectedPokemon(trainer)
+    setYourSelectedTrainer(trainer)
   }
 
   return (
@@ -23,7 +23,7 @@ const App = () => {
         </div>
       ) : isFightStarted ? (
         <FightArena
-          yourSelectedPokemon={yourSelectedPokemon}
+          yourSelectedTrainer={yourSelectedTrainer}
           setIsFightStarted={setIsFightStarted}
         />
       ) : isGetChooseTrainerClicked ? (

@@ -1,29 +1,37 @@
 import React, { useState, useEffect } from "react"
 import "./FightingBox.scss"
 
-const FightingBox = ({ handleClickFighting, yourPokemon }) => {
+const FightingBox = ({
+  handleClickFighting,
+  yourPokemon,
+  yourSelectedTrainer,
+  handleClickedPokemons,
+}) => {
   return (
     <>
       <div className="fighting-box">
-        <div
+        <button
           onClick={() => handleClickFighting(yourPokemon)}
           className="fighting"
         >
           <p>FIGHTING</p>
           <p>Select your attack move.</p>
-        </div>
-        <div className="bag">
+        </button>
+        <button className="bag">
           <p>BAG</p>
           <p>Use an item.</p>
-        </div>
-        <div className="pokemon">
+        </button>
+        <button
+          onClick={() => handleClickedPokemons(yourSelectedTrainer.pokemons)}
+          className="pokemon"
+        >
           <p>POKEMON</p>
           <p>Switch current pokemon.</p>
-        </div>
-        <div className="run">
+        </button>
+        <button className="run">
           <p>RUN</p>
           <p>Escape from battle.</p>
-        </div>
+        </button>
       </div>
     </>
   )

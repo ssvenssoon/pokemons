@@ -27,9 +27,9 @@
     background-repeat: no-repeat;
     background-size: cover;
     width: 80%;
-    height: 330px;
+    height: 250px;
     z-index: 10;
-    margin-top: -245px;
+    margin-top: -215px;
     position: relative;
     .sprites {
       display: flex;
@@ -52,18 +52,14 @@
 @media screen and (min-width: 850px) {
   .container {
     .fight-ground {
-      width: 80%;
-      height: 330px;
-      margin-top: -240px;
+      margin-top: -215px;
     }
   }
 }
 @media screen and (min-width: 950px) {
   .container {
     .fight-ground {
-      width: 80%;
-      height: 330px;
-      margin-top: -240px;
+      margin-top: -220px;
     }
   }
 }

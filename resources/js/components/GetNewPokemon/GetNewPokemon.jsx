@@ -4,6 +4,9 @@ import "./GetNewPokemon.scss"
 const GetNewPokemon = ({ setIsGetPokemonClicked }) => {
   const [pokemonName, setPokemonName] = useState("")
   const [pokemonData, setPokemonData] = useState(null)
+  const [getRequestError, setGetRequestError] = useState(null)
+  const [postRequestError, setPostRequestError] = useState(null)
+  const [okResponse, setOkResponse] = useState(null)
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -24,14 +27,14 @@ const GetNewPokemon = ({ setIsGetPokemonClicked }) => {
             stats: response.data.stats[0].base_stat,
           })
           .then((response) => {
-            console.log(response)
+            setOkResponse(response)
           })
           .catch((error) => {
-            console.error(error)
+            setPostRequestError(error)
           })
       })
       .catch((error) => {
-        console.error(error)
+        setGetRequestError(error)
         setPokemonData(null)
       })
   }

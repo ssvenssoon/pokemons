@@ -4,8 +4,9 @@ import FightingBox from "../FightingBox/FightingBox"
 import PokemonsInBattle from "../PokemonsInBattle/PokemonsInBattle"
 import FightEventsModal from "../FightEventsModal/FightEventsModal"
 import "./FightArena.scss"
+import PokemonsBox from "../PokemonsBox/PokemonsBox"
 
-const FightArena = ({ setIsFightStarted, yourSelectedPokemon }) => {
+const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
   const [yourPokemon, setYourPokemon] = useState(null)
   const [oppositePokemon, setOppositePokemon] = useState(null)
   const [newFight, setNewFight] = useState(false)
@@ -16,7 +17,9 @@ const FightArena = ({ setIsFightStarted, yourSelectedPokemon }) => {
   const [oppositionMakesAMove, setOppositionMakesAMove] = useState(false)
   const [oppositionMadeAMove, setOppositionMadeAMove] = useState(false)
   const [oppositePokemonHealth, setOppositePokemonHealth] = useState(null)
-  console.log(yourSelectedPokemon)
+  const [isTrainerClicked, setIsTrainerClicked] = useState(false)
+  const [selectedPokemonsFromTrainer, setSelectedPokemonsFromTrainer] =
+    useState(null)
 
   const getOppositionRandomMove = (moves) => {
     const randomIndex = Math.floor(Math.random() * moves.length)
@@ -81,9 +84,22 @@ const FightArena = ({ setIsFightStarted, yourSelectedPokemon }) => {
     setMoves(randomMoves)
   }
 
+  const handleClickedPokemons = (trainersPokemon) => {
+    setIsTrainerClicked(!isTrainerClicked)
+    setSelectedPokemonsFromTrainer(trainersPokemon)
+  }
+
+  const clickedPokemonFromTrainer = (pokemonFromTrainer) => {
+    setYourPokemon(pokemonFromTrainer)
+  }
+
   useEffect(() => {
     axios.get(`api/pokemon`).then((response) => {
-      setYourPokemon(response.data.pokemon[0])
+      if (yourSelectedTrainer) {
+        setYourPokemon(null)
+      } else {
+        setYourPokemon(response.data.pokemon[0])
+      }
       setOppositePokemon(response.data.pokemon[1])
       setOppositePokemonHealth(response.data.pokemon[1].health)
     })
@@ -102,6 +118,7 @@ const FightArena = ({ setIsFightStarted, yourSelectedPokemon }) => {
           Back to start screen
         </button>
         <FightEventsModal
+          yourSelectedTrainer={yourSelectedTrainer}
           setNewFight={setNewFight}
           newFight={newFight}
           win={win}
@@ -117,7 +134,7 @@ const FightArena = ({ setIsFightStarted, yourSelectedPokemon }) => {
           />
         </div>
         <div className="fighting-box-container">
-          {isFightClicked ? (
+          {isFightClicked && (
             <MovesBox
               oppositionMakesAMove={oppositionMakesAMove}
               win={win}
@@ -126,10 +143,21 @@ const FightArena = ({ setIsFightStarted, yourSelectedPokemon }) => {
               moves={moves}
               setIsFightClicked={setIsFightClicked}
             />
-          ) : (
+          )}
+          {isTrainerClicked && (
+            <PokemonsBox
+              clickedPokemonFromTrainer={clickedPokemonFromTrainer}
+              selectedPokemonsFromTrainer={selectedPokemonsFromTrainer}
+              setIsTrainerClicked={setIsTrainerClicked}
+            />
+          )}
+          {!isTrainerClicked && !isFightClicked && (
             <FightingBox
               handleClickFighting={handleClickFighting}
               yourPokemon={yourPokemon}
+              yourSelectedTrainer={yourSelectedTrainer}
+              handleClickedPokemons={handleClickedPokemons}
+              selectedPokemonsFromTrainer={selectedPokemonsFromTrainer}
             />
           )}
         </div>

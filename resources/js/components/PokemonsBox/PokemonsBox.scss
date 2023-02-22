@@ -1,0 +1,44 @@
+.pokemons-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .pokemons-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    :hover {
+      opacity: 0.8;
+    }
+    .pokemon {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      cursor: pointer;
+      p {
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+    }
+  }
+  .go-back-btn {
+    margin: auto;
+    background-color: #30a87a;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+    padding: 15px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    &:hover {
+      opacity: 0.8;
+    }
+    &:disabled {
+      opacity: 0.5;
+      cursor: auto;
+    }
+  }
+}
