@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BagController;
 use App\Http\Controllers\MoveController;
 use App\Http\Controllers\PokemonController;
 use App\Http\Controllers\TrainerController;

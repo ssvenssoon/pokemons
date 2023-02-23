@@ -10,7 +10,8 @@ class TrainerController extends Controller
 {
     public function index()
     {
-        $trainers = Trainer::with('pokemons.moves')->get();
+        $trainers = Trainer::with(['pokemons.moves', 'bags'])->get();
+
         return response()->json([
             'trainers' => $trainers
         ], 200);

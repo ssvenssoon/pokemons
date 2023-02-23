@@ -5,6 +5,7 @@ import PokemonsInBattle from "../PokemonsInBattle/PokemonsInBattle"
 import FightEventsModal from "../FightEventsModal/FightEventsModal"
 import "./FightArena.scss"
 import PokemonsBox from "../PokemonsBox/PokemonsBox"
+import BagItems from "../BagItems/BagItems"
 
 const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
   const [yourPokemon, setYourPokemon] = useState(null)
@@ -14,6 +15,8 @@ const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
   const [win, setWin] = useState(false)
   const [lost, setLost] = useState(false)
   const [moves, setMoves] = useState(null)
+  const [isBagItemsClicked, setIsBagItemsClicked] = useState(false)
+  const [yourBagItems, setYourBagItems] = useState(null)
   const [oppositionMakesAMove, setOppositionMakesAMove] = useState(false)
   const [oppositionMadeAMove, setOppositionMadeAMove] = useState(false)
   const [oppositePokemonHealth, setOppositePokemonHealth] = useState(null)
@@ -82,6 +85,11 @@ const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
     })
   }
 
+  const handleClickBag = (bags) => {
+    console.log(bags)
+    setIsBagItemsClicked(!isBagItemsClicked)
+  }
+
   useEffect(() => {
     if (yourPokemon?.health <= 0) {
       setLost(true)
@@ -146,6 +154,7 @@ const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
               setIsFightClicked={setIsFightClicked}
             />
           )}
+
           {isTrainerClicked && (
             <PokemonsBox
               clickedPokemonFromTrainer={clickedPokemonFromTrainer}
@@ -153,8 +162,17 @@ const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
               setIsTrainerClicked={setIsTrainerClicked}
             />
           )}
-          {!isTrainerClicked && !isFightClicked && (
+
+          {isBagItemsClicked && (
+            <BagItems
+              yourBagItems={yourBagItems}
+              setIsBagItemsClicked={setIsBagItemsClicked}
+            />
+          )}
+
+          {!isTrainerClicked && !isFightClicked && !isBagItemsClicked && (
             <FightingBox
+              handleClickBag={handleClickBag}
               handleClickFighting={handleClickFighting}
               yourPokemon={yourPokemon}
               yourSelectedTrainer={yourSelectedTrainer}

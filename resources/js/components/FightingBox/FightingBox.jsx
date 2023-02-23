@@ -6,6 +6,7 @@ const FightingBox = ({
   yourPokemon,
   yourSelectedTrainer,
   handleClickedPokemons,
+  handleClickBag,
 }) => {
   return (
     <>
@@ -24,7 +25,10 @@ const FightingBox = ({
             </>
           )}
         </button>
-        <button className="bag">
+        <button
+          onClick={() => handleClickBag(yourSelectedTrainer.bags)}
+          className="bag"
+        >
           <p>BAG</p>
           <p>Use an item.</p>
         </button>
