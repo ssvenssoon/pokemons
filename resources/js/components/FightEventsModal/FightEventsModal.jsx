@@ -8,7 +8,6 @@ const FightEventsModal = ({
   oppositePokemon,
   setNewFight,
   newFight,
-  yourSelectedTrainer,
 }) => {
   return (
     <>

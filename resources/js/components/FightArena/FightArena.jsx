@@ -26,19 +26,6 @@ const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
     return moves[randomIndex]
   }
 
-  useEffect(() => {
-    if (yourPokemon?.health <= 0) {
-      setLost(true)
-    }
-    if (!yourPokemon) {
-      return
-    } else {
-      axios.put(`api/pokemon/${yourPokemon.id}`, {
-        damage: yourPokemon.health,
-      })
-    }
-  }, [oppositionMadeAMove])
-
   const updateOppositionHealth = (moveName, power) => {
     const newOppositeHealth = Math.max(oppositePokemon.health - power / 2, 0)
 
@@ -90,8 +77,23 @@ const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
   }
 
   const clickedPokemonFromTrainer = (pokemonFromTrainer) => {
-    setYourPokemon(pokemonFromTrainer)
+    axios.get(`api/pokemon/${pokemonFromTrainer.id}`).then((response) => {
+      setYourPokemon(response.data)
+    })
   }
+
+  useEffect(() => {
+    if (yourPokemon?.health <= 0) {
+      setLost(true)
+    }
+    if (!yourPokemon) {
+      return
+    } else {
+      axios.put(`api/pokemon/${yourPokemon.id}`, {
+        damage: yourPokemon.health,
+      })
+    }
+  }, [oppositionMadeAMove])
 
   useEffect(() => {
     axios.get(`api/pokemon`).then((response) => {
@@ -157,7 +159,6 @@ const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
               yourPokemon={yourPokemon}
               yourSelectedTrainer={yourSelectedTrainer}
               handleClickedPokemons={handleClickedPokemons}
-              selectedPokemonsFromTrainer={selectedPokemonsFromTrainer}
             />
           )}
         </div>

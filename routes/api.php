@@ -25,6 +25,8 @@ Route::post('/pokemon', [PokemonController::class, 'store']);
 
 Route::get('/pokemon', [PokemonController::class, 'index']);
 
+Route::get('/pokemon/{id}', [PokemonController::class, 'getSpecificPokemon']);
+
 Route::put('/pokemon/{id}', [PokemonController::class, 'update']);
 
 Route::post('/moves', [MoveController::class, 'store']);

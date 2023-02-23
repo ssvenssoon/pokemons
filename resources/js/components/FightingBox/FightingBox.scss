@@ -8,6 +8,12 @@
   button {
     padding: 20px;
     cursor: pointer;
+    &:disabled {
+      opacity: 0.5;
+      &:hover {
+        opacity: 0.5;
+      }
+    }
     p {
       color: #fff;
       text-align: center;

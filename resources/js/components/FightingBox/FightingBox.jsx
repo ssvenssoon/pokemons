@@ -13,9 +13,16 @@ const FightingBox = ({
         <button
           onClick={() => handleClickFighting(yourPokemon)}
           className="fighting"
+          disabled={yourPokemon?.health === 0}
         >
-          <p>FIGHTING</p>
-          <p>Select your attack move.</p>
+          {yourPokemon?.health === 0 ? (
+            <p>{yourPokemon?.name.toUpperCase()} is dead...</p>
+          ) : (
+            <>
+              <p>FIGHTING</p>
+              <p>Select your attack move.</p>
+            </>
+          )}
         </button>
         <button className="bag">
           <p>BAG</p>
@@ -24,6 +31,7 @@ const FightingBox = ({
         <button
           onClick={() => handleClickedPokemons(yourSelectedTrainer.pokemons)}
           className="pokemon"
+          disabled={!yourSelectedTrainer}
         >
           <p>POKEMON</p>
           <p>Switch current pokemon.</p>

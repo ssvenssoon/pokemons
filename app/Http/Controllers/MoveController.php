@@ -10,7 +10,6 @@ class MoveController extends Controller
 {
     public function store(Request $request)
     {
-        Log::alert($request);
         $move = new Move();
         $move->name = $request->name;
         $move->power = $request->power;

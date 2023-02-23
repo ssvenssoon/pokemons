@@ -7,6 +7,7 @@ use App\Models\Pokemon;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class PokemonController extends Controller
 {
@@ -16,6 +17,17 @@ class PokemonController extends Controller
         return response()->json([
             'pokemon' => $pokemon
         ], 200);
+    }
+
+    public function getSpecificPokemon($id)
+    {
+        $pokemon = Pokemon::with('moves')->find($id);
+
+        if ($pokemon) {
+            return response()->json($pokemon);
+        } else {
+            return response()->json(['error' => 'Pokemon not found'], 404);
+        }
     }
 
     public function store(Request $request)
