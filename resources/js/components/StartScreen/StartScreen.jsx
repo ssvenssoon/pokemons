@@ -14,6 +14,12 @@ const StartScreen = ({
       <div className="home-screen-container">
         <h1>Welcome to Pokemon!</h1>
         <button
+          onClick={() => setIsFightStarted(!isFightStarted)}
+          className="new-fight-btn"
+        >
+          Start a fight!
+        </button>
+        <button
           onClick={() => setIsChooseTrainerClicked(!isGetChooseTrainerClicked)}
           className="new-fight-btn"
         >
@@ -24,12 +30,6 @@ const StartScreen = ({
           className="new-fight-btn"
         >
           Get a new pokemon!
-        </button>
-        <button
-          onClick={() => setIsFightStarted(!isFightStarted)}
-          className="new-fight-btn"
-        >
-          Start random fight!
         </button>
       </div>
     </>

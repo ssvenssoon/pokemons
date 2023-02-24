@@ -6,46 +6,58 @@ import FightEventsModal from "../FightEventsModal/FightEventsModal"
 import "./FightArena.scss"
 import PokemonsBox from "../PokemonsBox/PokemonsBox"
 import BagItems from "../BagItems/BagItems"
+import {
+  calculateNewHealth,
+  getOppositionRandomMove,
+  getShuffledMoves,
+} from "../../helpers"
 
 const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
   const [yourPokemon, setYourPokemon] = useState(null)
   const [oppositePokemon, setOppositePokemon] = useState(null)
   const [newFight, setNewFight] = useState(false)
+  const [fightOutcome, setFightOutcome] = useState({
+    won: false,
+    lost: false,
+    ongoing: false,
+  })
   const [isFightClicked, setIsFightClicked] = useState(false)
-  const [win, setWin] = useState(false)
-  const [lost, setLost] = useState(false)
-  const [moves, setMoves] = useState(null)
   const [isBagItemsClicked, setIsBagItemsClicked] = useState(false)
-  const [yourBagItems, setYourBagItems] = useState(null)
-  const [oppositionMakesAMove, setOppositionMakesAMove] = useState(false)
+  const [isTrainerClicked, setIsTrainerClicked] = useState(false)
+  const [moves, setMoves] = useState(null)
+  const [selectedItems, setSelectedItems] = useState(null)
   const [oppositionMadeAMove, setOppositionMadeAMove] = useState(false)
   const [oppositePokemonHealth, setOppositePokemonHealth] = useState(null)
-  const [isTrainerClicked, setIsTrainerClicked] = useState(false)
   const [selectedPokemonsFromTrainer, setSelectedPokemonsFromTrainer] =
     useState(null)
 
-  const getOppositionRandomMove = (moves) => {
-    const randomIndex = Math.floor(Math.random() * moves.length)
-    return moves[randomIndex]
+  const handleOppositionMakesAMove = () => {
+    setFightOutcome({
+      ongoing: true,
+    })
+    setTimeout(() => {
+      const randomMove = getOppositionRandomMove(oppositePokemon.moves)
+      const randomPower = randomMove.power
+      setYourPokemon((prevPokemon) => ({
+        ...prevPokemon,
+        health: calculateNewHealth(prevPokemon.health, randomPower),
+      }))
+      setOppositionMadeAMove(!oppositionMadeAMove)
+      setFightOutcome({
+        ongoing: false,
+      })
+    }, 2000)
   }
 
-  const updateOppositionHealth = (moveName, power) => {
-    const newOppositeHealth = Math.max(oppositePokemon.health - power / 2, 0)
+  const updateHealthOnClickedMove = async (power) => {
+    const newOppositeHealth = calculateNewHealth(oppositePokemon.health, power)
 
     if (newOppositeHealth <= 0) {
-      setWin(true)
+      setFightOutcome({
+        won: true,
+      })
     } else {
-      setOppositionMakesAMove(true)
-      setTimeout(() => {
-        const randomMove = getOppositionRandomMove(oppositePokemon.moves)
-        const randomPower = randomMove.power
-        setYourPokemon((prevPokemon) => ({
-          ...prevPokemon,
-          health: Math.max(prevPokemon.health - randomPower / 2, 0),
-        }))
-        setOppositionMadeAMove(!oppositionMadeAMove)
-        setOppositionMakesAMove(false)
-      }, 3000)
+      handleOppositionMakesAMove()
     }
 
     if (newOppositeHealth !== oppositePokemon.health) {
@@ -54,22 +66,20 @@ const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
         health: newOppositeHealth,
       }))
 
-      axios
-        .put(`api/pokemon/${oppositePokemon.id}`, {
+      try {
+        await axios.put(`api/pokemon/${oppositePokemon.id}`, {
           damage: newOppositeHealth,
         })
-        .then((response) => {
-          setOppositePokemonHealth(newOppositeHealth)
-        })
-        .catch((error) => {
-          console.error(error)
-        })
+        setOppositePokemonHealth(newOppositeHealth)
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
 
   const handleClickFighting = (frontSprite) => {
     setIsFightClicked(!isFightClicked)
-    const shuffledMoves = frontSprite.moves.sort(() => 0.5 - Math.random())
+    const shuffledMoves = getShuffledMoves(frontSprite.moves)
     const randomMoves = shuffledMoves.slice(0, 4)
     setMoves(randomMoves)
   }
@@ -79,43 +89,75 @@ const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
     setSelectedPokemonsFromTrainer(trainersPokemon)
   }
 
-  const clickedPokemonFromTrainer = (pokemonFromTrainer) => {
-    axios.get(`api/pokemon/${pokemonFromTrainer.id}`).then((response) => {
+  const clickedPokemonFromTrainer = async (pokemonFromTrainer) => {
+    try {
+      const response = await axios.get(`api/pokemon/${pokemonFromTrainer.id}`)
       setYourPokemon(response.data)
-    })
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const handleClickBag = (bags) => {
-    console.log(bags)
+    setSelectedItems(bags)
     setIsBagItemsClicked(!isBagItemsClicked)
   }
 
+  const handleBagItemsDescription = async (bagDescription) => {
+    try {
+      if (yourPokemon) {
+        const response = await axios.put(`api/heal-pokemon/${yourPokemon.id}`, {
+          bagDescription: bagDescription,
+        })
+        setYourPokemon(response.data.data)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   useEffect(() => {
-    if (yourPokemon?.health <= 0) {
-      setLost(true)
+    const updateYourPokemonHealth = async () => {
+      try {
+        if (yourPokemon?.health <= 0) {
+          setFightOutcome({
+            lost: true,
+          })
+        }
+        if (!yourPokemon) {
+          return
+        }
+        await axios.put(`api/pokemon/${yourPokemon.id}`, {
+          damage: yourPokemon.health,
+        })
+      } catch (error) {
+        console.error(error)
+      }
     }
-    if (!yourPokemon) {
-      return
-    } else {
-      axios.put(`api/pokemon/${yourPokemon.id}`, {
-        damage: yourPokemon.health,
-      })
-    }
+    updateYourPokemonHealth()
   }, [oppositionMadeAMove])
 
   useEffect(() => {
-    axios.get(`api/pokemon`).then((response) => {
-      if (yourSelectedTrainer) {
-        setYourPokemon(null)
-      } else {
-        setYourPokemon(response.data.pokemon[0])
+    const fetchPokemon = async () => {
+      try {
+        const response = await axios.get(`api/pokemon`)
+        if (yourSelectedTrainer) {
+          setYourPokemon(null)
+        } else {
+          setYourPokemon(response.data.pokemon[0])
+        }
+        setOppositePokemon(response.data.pokemon[1])
+        setOppositePokemonHealth(response.data.pokemon[1].health)
+        setFightOutcome({
+          won: false,
+          lost: false,
+        })
+        setIsFightClicked(false)
+      } catch (error) {
+        console.error(error)
       }
-      setOppositePokemon(response.data.pokemon[1])
-      setOppositePokemonHealth(response.data.pokemon[1].health)
-    })
-    setWin(false)
-    setLost(false)
-    setIsFightClicked(false)
+    }
+    fetchPokemon()
   }, [newFight])
 
   return (
@@ -131,9 +173,7 @@ const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
           yourSelectedTrainer={yourSelectedTrainer}
           setNewFight={setNewFight}
           newFight={newFight}
-          win={win}
-          lost={lost}
-          oppositionMakesAMove={oppositionMakesAMove}
+          fightOutcome={fightOutcome}
           oppositePokemon={oppositePokemon}
         />
         <div className="sprites">
@@ -146,12 +186,10 @@ const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
         <div className="fighting-box-container">
           {isFightClicked && (
             <MovesBox
-              oppositionMakesAMove={oppositionMakesAMove}
-              win={win}
-              lost={lost}
-              updateOppositionHealth={updateOppositionHealth}
               moves={moves}
+              fightOutcome={fightOutcome}
               setIsFightClicked={setIsFightClicked}
+              updateHealthOnClickedMove={updateHealthOnClickedMove}
             />
           )}
 
@@ -165,7 +203,8 @@ const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
 
           {isBagItemsClicked && (
             <BagItems
-              yourBagItems={yourBagItems}
+              handleBagItemsDescription={handleBagItemsDescription}
+              selectedItems={selectedItems}
               setIsBagItemsClicked={setIsBagItemsClicked}
             />
           )}

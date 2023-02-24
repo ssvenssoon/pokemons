@@ -4,16 +4,14 @@ import "./MovesBox.scss"
 const MovesBox = ({
   moves,
   setIsFightClicked,
-  updateOppositionHealth,
-  win,
-  oppositionMakesAMove,
-  lost,
+  updateHealthOnClickedMove,
+  fightOutcome,
 }) => {
   return (
     <>
       <div className="moves-box">
         <button
-          disabled={oppositionMakesAMove}
+          disabled={fightOutcome?.ongoing}
           className="go-back-btn"
           onClick={() => setIsFightClicked(false)}
         >
@@ -22,8 +20,10 @@ const MovesBox = ({
         <div className="moves-container">
           {moves.map((item) => (
             <button
-              disabled={win || lost || oppositionMakesAMove}
-              onClick={(e) => updateOppositionHealth(item.name, item.power)}
+              disabled={
+                fightOutcome.won || fightOutcome.lost || fightOutcome?.ongoing
+              }
+              onClick={(e) => updateHealthOnClickedMove(item.power)}
               className="moves"
               key={item.id}
             >

@@ -96,4 +96,27 @@ class PokemonController extends Controller
         Pokemon::where('id', $id)
             ->update(['health' => $request->damage]);
     }
+
+    public function heal(Request $request, $id)
+    {
+        $value = $request->input('bagDescription');
+        preg_match('/(\d+)/', $value, $matches);
+        $hpRecovered = intval($matches[0]);
+
+        $pokemon = Pokemon::with('moves')->findOrFail($id);
+        $newHealth = $pokemon->health + $hpRecovered;
+
+        if ($newHealth > 100) {
+            $pokemon->health = 100;
+        } else {
+            $pokemon->health = $newHealth;
+        }
+
+        $pokemon->save();
+
+        return response()->json([
+            'message' => "Pokemon's health updated successfully.",
+            'data' => $pokemon
+        ]);
+    }
 }

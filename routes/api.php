@@ -30,6 +30,8 @@ Route::get('/pokemon/{id}', [PokemonController::class, 'getSpecificPokemon']);
 
 Route::put('/pokemon/{id}', [PokemonController::class, 'update']);
 
+Route::put('/heal-pokemon/{id}', [PokemonController::class, 'heal']);
+
 Route::post('/moves', [MoveController::class, 'store']);
 
 Route::get('/trainers', [TrainerController::class, 'index']);
