@@ -1,0 +1,79 @@
+.get-pokemon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  .shop-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 20px;
+    width: 60%;
+    .shop-card {
+      padding: 20px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      max-width: 300px;
+      margin: auto;
+      text-align: center;
+      font-family: arial;
+      border-radius: 10px;
+      .bag-items {
+        text-align: center;
+        color: #fff;
+        list-style: none;
+        font-size: 20px;
+        h1 {
+          font-size: 20px;
+        }
+        p {
+          font-size: 15px;
+        }
+        .shop-btn {
+          margin-top: 10px;
+          background: linear-gradient(to bottom right, #ef4765, #ff9a5a);
+          border: 0;
+          border-radius: 12px;
+          color: #ffffff;
+          cursor: pointer;
+          display: inline-block;
+          font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica,
+            Arial, sans-serif;
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 2.5;
+          outline: transparent;
+          padding: 0 1rem;
+          text-align: center;
+          text-decoration: none;
+          transition: box-shadow 0.2s ease-in-out;
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+          white-space: nowrap;
+          &:not([disabled]):focus {
+            box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+              -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+              0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+          }
+          &:not([disabled]):hover {
+            box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5),
+              -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5),
+              0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
+          }
+        }
+      }
+    }
+  }
+  .back-to-start-screen-btn {
+    padding: 10px;
+    font-size: 17px;
+    border: none;
+    background-color: #58b028;
+    color: #fff;
+    font-weight: bold;
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
+  }
+}

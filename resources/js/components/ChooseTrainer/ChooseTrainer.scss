@@ -21,6 +21,7 @@
     height: 70px;
     border-radius: 50%;
     right: 20px;
+    padding: 1px;
   }
 
   .trainers-ul {
@@ -36,8 +37,8 @@
       flex-direction: column;
       cursor: pointer;
       .trainers-profile-pic {
-        width: 250px;
-        height: 200px;
+        width: 220px;
+        height: 180px;
         margin-top: 20px;
       }
       .trainers-list-item {

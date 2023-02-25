@@ -3,6 +3,7 @@ import FightArena from "./components/FightArena/FightArena"
 import StartScreen from "./components/StartScreen/StartScreen"
 import GetNewPokemon from "./components/GetNewPokemon/GetNewPokemon"
 import ChooseTrainer from "./components/ChooseTrainer/ChooseTrainer"
+import Shop from "./components/Shop/Shop"
 import "./App.scss"
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
   const [isGetPokemonClicked, setIsGetPokemonClicked] = useState(false)
   const [isGetChooseTrainerClicked, setIsChooseTrainerClicked] = useState(false)
   const [yourSelectedTrainer, setYourSelectedTrainer] = useState(false)
+  const [isShopClicked, setIsShopClicked] = useState(false)
 
   const handleClickedTrainer = (trainer) => {
     setYourSelectedTrainer(trainer)
@@ -34,6 +36,10 @@ const App = () => {
             setIsChooseTrainerClicked={setIsChooseTrainerClicked}
           />
         </div>
+      ) : isShopClicked ? (
+        <div className="container">
+          <Shop setIsShopClicked={setIsShopClicked} />
+        </div>
       ) : (
         <div className="container">
           <StartScreen
@@ -44,6 +50,8 @@ const App = () => {
             isFightStarted={isFightStarted}
             setIsChooseTrainerClicked={setIsChooseTrainerClicked}
             isGetChooseTrainerClicked={isGetChooseTrainerClicked}
+            setIsShopClicked={setIsShopClicked}
+            isShopClicked={isShopClicked}
           />
         </div>
       )}

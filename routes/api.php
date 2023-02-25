@@ -35,3 +35,5 @@ Route::put('/heal-pokemon/{id}', [PokemonController::class, 'heal']);
 Route::post('/moves', [MoveController::class, 'store']);
 
 Route::get('/trainers', [TrainerController::class, 'index']);
+
+Route::get('/bags', [BagController::class, 'index']);

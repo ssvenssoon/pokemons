@@ -3,23 +3,28 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  gap: 30px;
   h1 {
     font-size: 30px;
     color: #fff;
   }
-  gap: 30px;
-  .new-fight-btn {
-    padding: 25px;
-    background-color: rgb(55, 199, 55);
-    border: none;
-    border-radius: 20px;
-    font-size: 22px;
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: #fff;
-    &:hover {
-      opacity: 0.8;
+  .btn-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 30px;
+    .new-fight-btn {
+      padding: 23px;
+      background-color: rgb(55, 199, 55);
+      border: none;
+      border-radius: 20px;
+      font-size: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #fff;
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
 }
@@ -27,4 +32,5 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
+  padding: 1px;
 }
