@@ -28,7 +28,7 @@ const Shop = ({ setIsShopClicked }) => {
                   <p className="price">Price: {item.price}</p>
                   <p className="effect">Effect: {item.description}</p>
 
-                  <button class="shop-btn" role="button">
+                  <button className="shop-btn" role="button">
                     Buy
                   </button>
                 </li>

@@ -12,6 +12,7 @@ const FightEventsModal = ({
       {fightOutcome.won && (
         <div className="modal-container">
           <h2 className="won-modal-heading">Your pokemon won!</h2>
+          <p>You received 100 coins!</p>
           <button onClick={() => setNewFight(!newFight)}>New fight!</button>
         </div>
       )}

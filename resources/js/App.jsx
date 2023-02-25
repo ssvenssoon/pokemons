@@ -25,6 +25,7 @@ const App = () => {
         </div>
       ) : isFightStarted ? (
         <FightArena
+          setYourSelectedTrainer={setYourSelectedTrainer}
           yourSelectedTrainer={yourSelectedTrainer}
           setIsFightStarted={setIsFightStarted}
         />

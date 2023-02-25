@@ -36,4 +36,6 @@ Route::post('/moves', [MoveController::class, 'store']);
 
 Route::get('/trainers', [TrainerController::class, 'index']);
 
+Route::put('/trainers/{id}', [TrainerController::class, 'updateCoins']);
+
 Route::get('/bags', [BagController::class, 'index']);

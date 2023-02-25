@@ -16,4 +16,15 @@ class TrainerController extends Controller
             'trainers' => $trainers
         ], 200);
     }
+
+    public function updateCoins(Request $request, $id)
+    {
+        $trainer = Trainer::with(['pokemons.moves', 'bags'])->findOrFail($id);
+
+        $newCoins = $request->input('newCoins');
+
+        $trainer->increment('coins', $newCoins);
+
+        return response()->json(['message' => 'Coins updated successfully', 'trainer' => $trainer], 200);
+    }
 }

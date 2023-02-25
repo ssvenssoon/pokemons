@@ -12,7 +12,11 @@ import {
   getShuffledMoves,
 } from "../../helpers"
 
-const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
+const FightArena = ({
+  setIsFightStarted,
+  yourSelectedTrainer,
+  setYourSelectedTrainer,
+}) => {
   const [yourPokemon, setYourPokemon] = useState(null)
   const [oppositePokemon, setOppositePokemon] = useState(null)
   const [newFight, setNewFight] = useState(false)
@@ -56,6 +60,20 @@ const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
       setFightOutcome({
         won: true,
       })
+      try {
+        const response = await axios.put(
+          `api/trainers/${yourSelectedTrainer.id}`,
+          {
+            newCoins: 100,
+          }
+        )
+        console.log(response.data.trainer)
+        setSelectedItems(response.data.trainer.bags)
+        setYourSelectedTrainer(response.data.trainer)
+        setSelectedPokemonsFromTrainer(response.data.trainer.pokemons)
+      } catch (error) {
+        console.error(error)
+      }
     } else {
       handleOppositionMakesAMove()
     }
@@ -99,6 +117,7 @@ const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
   }
 
   const handleClickBag = (bags) => {
+    console.log(bags)
     setSelectedItems(bags)
     setIsBagItemsClicked(!isBagItemsClicked)
   }
@@ -169,6 +188,10 @@ const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
         >
           Back to start screen
         </button>
+        <div className="your-amount-of-coins-container">
+          <img src="/images/coin.png" alt="A coin icon" />
+          <p>{yourSelectedTrainer?.coins}</p>
+        </div>
         <img
           src={yourSelectedTrainer.profile_pic}
           className="your-trainer-avatar"
