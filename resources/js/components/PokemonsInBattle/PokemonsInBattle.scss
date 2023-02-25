@@ -2,13 +2,14 @@
   position: absolute;
   bottom: 10%;
   right: 5%;
-  width: 300px;
+  width: 250px;
   z-index: 1;
   text-align: center;
   background-color: azure;
   margin-right: 45px;
   border-radius: 20px;
   h3 {
+    font-size: 15px;
     color: #000;
   }
 }
@@ -23,12 +24,13 @@
   position: absolute;
   left: 5%;
   top: 20%;
-  width: 300px;
+  width: 250px;
   z-index: 1;
   text-align: center;
   background-color: azure;
   border-radius: 20px;
   h3 {
+    font-size: 15px;
     color: #000;
   }
 }
@@ -43,16 +45,33 @@
 @media screen and (min-width: 850px) {
   .sprite-from-front {
     position: absolute;
-    bottom: 0%;
+    bottom: -3%;
     left: 17%;
-    width: 130px;
+    width: 120px;
     z-index: 1;
   }
   .sprite-from-back {
     position: absolute;
     right: 22%;
     top: 15%;
-    width: 130px;
+    width: 120px;
+    z-index: 1;
+  }
+}
+
+@media screen and (min-height: 800px) {
+  .sprite-from-front {
+    position: absolute;
+    bottom: 12%;
+    left: 20%;
+    width: 120px;
+    z-index: 1;
+  }
+  .sprite-from-back {
+    position: absolute;
+    right: 27%;
+    top: 33%;
+    width: 120px;
     z-index: 1;
   }
 }

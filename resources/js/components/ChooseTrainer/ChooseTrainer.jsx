@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react"
 import "./ChooseTrainer.scss"
 
-const ChooseTrainer = ({ setIsChooseTrainerClicked, handleClickedTrainer }) => {
+const ChooseTrainer = ({
+  setIsChooseTrainerClicked,
+  handleClickedTrainer,
+  yourSelectedTrainer,
+}) => {
   const [trainers, setTrainers] = useState(null)
 
   useEffect(() => {
@@ -19,6 +23,10 @@ const ChooseTrainer = ({ setIsChooseTrainerClicked, handleClickedTrainer }) => {
         >
           Back to start screen
         </button>
+        <img
+          src={yourSelectedTrainer.profile_pic}
+          className="your-trainer-avatar"
+        />
         <ul className="trainers-ul">
           {trainers?.map((item) => {
             return (

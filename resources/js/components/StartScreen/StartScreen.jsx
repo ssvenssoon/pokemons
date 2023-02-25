@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import "../StartScreen/StartScreen.scss"
+import "./StartScreen.scss"
 
 const StartScreen = ({
   isFightStarted,
@@ -8,10 +8,16 @@ const StartScreen = ({
   setIsGetPokemonClicked,
   isGetChooseTrainerClicked,
   setIsChooseTrainerClicked,
+  yourSelectedTrainer,
 }) => {
+  console.log(yourSelectedTrainer)
   return (
     <>
       <div className="home-screen-container">
+        <img
+          src={yourSelectedTrainer.profile_pic}
+          className="your-trainer-avatar"
+        />
         <h1>Welcome to Pokemon!</h1>
         <button
           onClick={() => setIsFightStarted(!isFightStarted)}

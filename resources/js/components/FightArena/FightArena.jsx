@@ -169,6 +169,10 @@ const FightArena = ({ setIsFightStarted, yourSelectedTrainer }) => {
         >
           Back to start screen
         </button>
+        <img
+          src={yourSelectedTrainer.profile_pic}
+          className="your-trainer-avatar"
+        />
         <FightEventsModal
           yourSelectedTrainer={yourSelectedTrainer}
           setNewFight={setNewFight}

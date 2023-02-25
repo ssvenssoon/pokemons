@@ -26,11 +26,19 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    width: 80%;
-    height: 250px;
+    width: 70%;
+    height: 220px;
     z-index: 10;
     margin-top: -215px;
     position: relative;
+    .your-trainer-avatar {
+      position: absolute;
+      top: -70px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      right: 10px;
+    }
     .sprites {
       display: flex;
       justify-content: center;
@@ -60,6 +68,13 @@
   .container {
     .fight-ground {
       margin-top: -220px;
+    }
+  }
+}
+@media screen and (min-height: 800px) {
+  .container {
+    .fight-ground {
+      height: 400px;
     }
   }
 }

@@ -29,6 +29,7 @@ const App = () => {
       ) : isGetChooseTrainerClicked ? (
         <div className="container">
           <ChooseTrainer
+            yourSelectedTrainer={yourSelectedTrainer}
             handleClickedTrainer={handleClickedTrainer}
             setIsChooseTrainerClicked={setIsChooseTrainerClicked}
           />
@@ -36,6 +37,7 @@ const App = () => {
       ) : (
         <div className="container">
           <StartScreen
+            yourSelectedTrainer={yourSelectedTrainer}
             setIsGetPokemonClicked={setIsGetPokemonClicked}
             isGetPokemonClicked={isGetPokemonClicked}
             setIsFightStarted={setIsFightStarted}
