@@ -19,8 +19,7 @@ const BagItems = ({
           {selectedItems.map((item) => (
             <div className="items-container" key={item.id}>
               <button
-                // disabled={win || lost || oppositionMakesAMove}
-                onClick={() => handleBagItemsDescription(item.description)}
+                onClick={() => handleBagItemsDescription(item)}
                 className="moves"
                 key={item.id}
               >

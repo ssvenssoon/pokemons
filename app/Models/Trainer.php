@@ -16,6 +16,6 @@ class Trainer extends Model
 
     public function bags()
     {
-        return $this->belongsToMany(Bag::class, 'bags_trainers', 'bags_id', 'trainers_id');
+        return $this->belongsToMany(Bag::class, 'bags_trainers', 'trainers_id', 'bags_id');
     }
 }

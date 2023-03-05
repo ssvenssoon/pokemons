@@ -67,7 +67,6 @@ const FightArena = ({
             newCoins: 100,
           }
         )
-        console.log(response.data.trainer)
         setSelectedItems(response.data.trainer.bags)
         setYourSelectedTrainer(response.data.trainer)
         setSelectedPokemonsFromTrainer(response.data.trainer.pokemons)
@@ -122,13 +121,25 @@ const FightArena = ({
     setIsBagItemsClicked(!isBagItemsClicked)
   }
 
-  const handleBagItemsDescription = async (bagDescription) => {
+  const handleBagItemsDescription = async (item) => {
     try {
       if (yourPokemon) {
         const response = await axios.put(`api/heal-pokemon/${yourPokemon.id}`, {
-          bagDescription: bagDescription,
+          bagDescription: item.description,
         })
         setYourPokemon(response.data.data)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+    try {
+      if (yourPokemon) {
+        const response = await axios.delete(
+          `api/remove-bag/${item.id}/trainer/${yourSelectedTrainer.id}`
+        )
+        setYourSelectedTrainer(response.data.trainer)
+        setSelectedItems(response.data.trainer.bags)
+        setSelectedPokemonsFromTrainer(response.data.trainer.pokemons)
       }
     } catch (error) {
       console.error(error)
