@@ -6,24 +6,16 @@ import FightEventsModal from "../FightEventsModal/FightEventsModal"
 import "./FightArena.scss"
 import PokemonsBox from "../PokemonsBox/PokemonsBox"
 import BagItems from "../BagItems/BagItems"
-import {
-  calculateNewHealth,
-  getOppositionRandomMove,
-  getShuffledMoves,
-} from "../../helpers"
+import { calculateNewHealth, getOppositionRandomMove, getShuffledMoves } from "../../helpers"
 
-const FightArena = ({
-  setIsFightStarted,
-  yourSelectedTrainer,
-  setYourSelectedTrainer,
-}) => {
+const FightArena = ({ setIsFightStarted, yourSelectedTrainer, setYourSelectedTrainer }) => {
   const [yourPokemon, setYourPokemon] = useState(null)
   const [oppositePokemon, setOppositePokemon] = useState(null)
   const [newFight, setNewFight] = useState(false)
   const [fightOutcome, setFightOutcome] = useState({
     won: false,
     lost: false,
-    ongoing: false,
+    ongoing: false
   })
   const [isFightClicked, setIsFightClicked] = useState(false)
   const [isBagItemsClicked, setIsBagItemsClicked] = useState(false)
@@ -32,23 +24,22 @@ const FightArena = ({
   const [selectedItems, setSelectedItems] = useState(null)
   const [oppositionMadeAMove, setOppositionMadeAMove] = useState(false)
   const [oppositePokemonHealth, setOppositePokemonHealth] = useState(null)
-  const [selectedPokemonsFromTrainer, setSelectedPokemonsFromTrainer] =
-    useState(null)
+  const [selectedPokemonsFromTrainer, setSelectedPokemonsFromTrainer] = useState(null)
 
   const handleOppositionMakesAMove = () => {
     setFightOutcome({
-      ongoing: true,
+      ongoing: true
     })
     setTimeout(() => {
       const randomMove = getOppositionRandomMove(oppositePokemon.moves)
       const randomPower = randomMove.power
       setYourPokemon((prevPokemon) => ({
         ...prevPokemon,
-        health: calculateNewHealth(prevPokemon.health, randomPower),
+        health: calculateNewHealth(prevPokemon.health, randomPower)
       }))
       setOppositionMadeAMove(!oppositionMadeAMove)
       setFightOutcome({
-        ongoing: false,
+        ongoing: false
       })
     }, 2000)
   }
@@ -58,15 +49,12 @@ const FightArena = ({
 
     if (newOppositeHealth <= 0) {
       setFightOutcome({
-        won: true,
+        won: true
       })
       try {
-        const response = await axios.put(
-          `api/trainers/${yourSelectedTrainer.id}`,
-          {
-            newCoins: 100,
-          }
-        )
+        const response = await axios.put(`api/trainers/${yourSelectedTrainer.id}`, {
+          newCoins: 100
+        })
         setSelectedItems(response.data.trainer.bags)
         setYourSelectedTrainer(response.data.trainer)
         setSelectedPokemonsFromTrainer(response.data.trainer.pokemons)
@@ -80,12 +68,12 @@ const FightArena = ({
     if (newOppositeHealth !== oppositePokemon.health) {
       setOppositePokemon((prevPokemon) => ({
         ...prevPokemon,
-        health: newOppositeHealth,
+        health: newOppositeHealth
       }))
 
       try {
         await axios.put(`api/pokemon/${oppositePokemon.id}`, {
-          damage: newOppositeHealth,
+          damage: newOppositeHealth
         })
         setOppositePokemonHealth(newOppositeHealth)
       } catch (error) {
@@ -116,7 +104,6 @@ const FightArena = ({
   }
 
   const handleClickBag = (bags) => {
-    console.log(bags)
     setSelectedItems(bags)
     setIsBagItemsClicked(!isBagItemsClicked)
   }
@@ -125,7 +112,7 @@ const FightArena = ({
     try {
       if (yourPokemon) {
         const response = await axios.put(`api/heal-pokemon/${yourPokemon.id}`, {
-          bagDescription: item.description,
+          bagDescription: item.description
         })
         setYourPokemon(response.data.data)
       }
@@ -151,14 +138,14 @@ const FightArena = ({
       try {
         if (yourPokemon?.health <= 0) {
           setFightOutcome({
-            lost: true,
+            lost: true
           })
         }
         if (!yourPokemon) {
           return
         }
         await axios.put(`api/pokemon/${yourPokemon.id}`, {
-          damage: yourPokemon.health,
+          damage: yourPokemon.health
         })
       } catch (error) {
         console.error(error)
@@ -180,7 +167,7 @@ const FightArena = ({
         setOppositePokemonHealth(response.data.pokemon[1].health)
         setFightOutcome({
           won: false,
-          lost: false,
+          lost: false
         })
         setIsFightClicked(false)
       } catch (error) {
@@ -193,20 +180,14 @@ const FightArena = ({
   return (
     <div className="container">
       <div className="fight-ground">
-        <button
-          onClick={() => setIsFightStarted(false)}
-          className="back-to-start-screen-btn"
-        >
+        <button onClick={() => setIsFightStarted(false)} className="back-to-start-screen-btn">
           Back to start screen
         </button>
         <div className="your-amount-of-coins-container">
           <img src="/images/coin.png" alt="A coin icon" />
           <p>{yourSelectedTrainer?.coins}</p>
         </div>
-        <img
-          src={yourSelectedTrainer.profile_pic}
-          className="your-trainer-avatar"
-        />
+        <img src={yourSelectedTrainer.profile_pic} className="your-trainer-avatar" />
         <FightEventsModal
           yourSelectedTrainer={yourSelectedTrainer}
           setNewFight={setNewFight}
