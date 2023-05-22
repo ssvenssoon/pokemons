@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react"
 import "./ChooseTrainer.scss"
 
-const ChooseTrainer = ({
-  setIsChooseTrainerClicked,
-  handleClickedTrainer,
-  yourSelectedTrainer,
-}) => {
+const ChooseTrainer = ({ setIsChooseTrainerClicked, handleClickedTrainer, yourSelectedTrainer }) => {
   const [trainers, setTrainers] = useState(null)
 
   useEffect(() => {
@@ -17,29 +13,15 @@ const ChooseTrainer = ({
   return (
     <>
       <div className="choose-pokemon-container">
-        <button
-          onClick={() => setIsChooseTrainerClicked(false)}
-          className="back-to-start-screen-btn"
-        >
+        <button onClick={() => setIsChooseTrainerClicked(false)} className="back-to-start-screen-btn">
           Back to start screen
         </button>
-        <img
-          src={yourSelectedTrainer.profile_pic}
-          className="your-trainer-avatar"
-        />
+        <img src={yourSelectedTrainer.profile_pic} className="your-trainer-avatar" />
         <ul className="trainers-ul">
           {trainers?.map((item) => {
             return (
-              <div
-                className="trainers-container"
-                key={item.id}
-                onClick={() => handleClickedTrainer(item)}
-              >
-                <img
-                  className="trainers-profile-pic"
-                  src={item.profile_pic}
-                  alt={item.name + "-image"}
-                />
+              <div className="trainers-container" key={item.id} onClick={() => handleClickedTrainer(item)}>
+                <img className="trainers-profile-pic" src={item.profile_pic} alt={item.name + "-image"} />
                 <li className="trainers-list-item">{"Name: " + item.name}</li>
                 <li className="trainers-list-item">{"Age: " + item.age}</li>
               </div>

@@ -121,9 +121,7 @@ const FightArena = ({ setIsFightStarted, yourSelectedTrainer, setYourSelectedTra
     }
     try {
       if (yourPokemon) {
-        const response = await axios.delete(
-          `api/remove-bag/${item.id}/trainer/${yourSelectedTrainer.id}`
-        )
+        const response = await axios.delete(`api/remove-bag/${item.id}/trainer/${yourSelectedTrainer.id}`)
         setYourSelectedTrainer(response.data.trainer)
         setSelectedItems(response.data.trainer.bags)
         setSelectedPokemonsFromTrainer(response.data.trainer.pokemons)

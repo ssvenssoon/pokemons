@@ -29,4 +29,12 @@ class BagController extends Controller
             'trainer' => $trainer
         ]);
     }
+
+    public function addItemToTrainer(Request $request, $trainerId)
+    {
+        $trainer = Trainer::find($trainerId);
+        $bagItem = $request->input('bagItem');
+
+        $trainer->bags()->attach($bagItem['id']);
+    }
 }

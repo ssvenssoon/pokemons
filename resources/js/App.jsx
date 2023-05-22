@@ -39,7 +39,7 @@ const App = () => {
         </div>
       ) : isShopClicked ? (
         <div className="container">
-          <Shop setIsShopClicked={setIsShopClicked} />
+          <Shop setIsShopClicked={setIsShopClicked} yourSelectedTrainer={yourSelectedTrainer} />
         </div>
       ) : (
         <div className="container">
