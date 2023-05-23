@@ -35,6 +35,16 @@ class BagController extends Controller
         $trainer = Trainer::find($trainerId);
         $bagItem = $request->input('bagItem');
 
-        $trainer->bags()->attach($bagItem['id']);
+        $cost = $bagItem['price'];
+        $trainerCoins = $trainer->coins;
+
+        if ($trainerCoins >= $cost) {
+            $trainer->coins -= $cost;
+            $trainer->save();
+            $trainer->bags()->attach($bagItem['id']);
+            return response()->json(['message' => 'Item added successfully'], 200);
+        } else {
+            return response()->json(['message' => 'Insufficient coins'], 400);
+        }
     }
 }

@@ -26,6 +26,9 @@
     grid-template-columns: auto auto;
     gap: 25px;
     margin: 40px;
+    overflow: scroll;
+    max-height: 286px;
+    padding-right: 17px;
     .items-container {
       display: flex;
       justify-content: center;

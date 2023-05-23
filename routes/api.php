@@ -38,6 +38,8 @@ Route::get('/trainers', [TrainerController::class, 'index']);
 
 Route::put('/trainers/{id}', [TrainerController::class, 'updateCoins']);
 
+Route::get('/get-trainer{id}', [TrainerController::class, 'getTrainer']);
+
 Route::get('/bags', [BagController::class, 'index']);
 
 Route::delete('/remove-bag/{bagId}/trainer/{trainerId}', [BagController::class, 'removeItem']);
