@@ -20,9 +20,22 @@ class BagController extends Controller
     public function removeItem($bagId, $trainerId)
     {
         $trainer = Trainer::with('pokemons')->find($trainerId);
-        $trainer->bags()->detach($bagId);
+        $pivotId = $trainer->bags()->wherePivot('bags_id', $bagId)
+            ->wherePivot('trainers_id', $trainerId)
+            ->pluck('bags_trainers.id')
+            ->first();
+
+        if ($pivotId) {
+            $trainer->bags()->wherePivot('id', $pivotId)->detach();
+        } else {
+            return response()->json([
+                'message' => "Something went wrong!",
+                'trainer' => $trainer
+            ], 404);
+        }
 
         $trainer->load('bags');
+
 
         return response()->json([
             'message' => "Bag removed from trainer.",

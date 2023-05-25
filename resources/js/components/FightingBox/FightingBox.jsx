@@ -6,7 +6,7 @@ const FightingBox = ({
   yourPokemon,
   yourSelectedTrainer,
   handleClickedPokemons,
-  handleClickBag,
+  handleClickBag
 }) => {
   return (
     <>

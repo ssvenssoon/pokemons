@@ -6,6 +6,7 @@ const Shop = ({ setIsShopClicked, yourSelectedTrainer, handleClickedTrainer }) =
   const [bags, setBags] = useState(null)
   const [isBuyClicked, setIsBuyClicked] = useState(false)
   const [isInsufficientCoins, setIsInsufficientCoins] = useState(false)
+  const [isBoughtSuccessfully, setIsBoughtSuccessfully] = useState(false)
 
   useEffect(() => {
     axios.get(`api/bags`).then((response) => {
@@ -20,6 +21,7 @@ const Shop = ({ setIsShopClicked, yourSelectedTrainer, handleClickedTrainer }) =
         await axios.post(`api/add-bag/trainer/${yourSelectedTrainer.id}`, {
           bagItem: item
         })
+        setIsBoughtSuccessfully(true)
       }
     } catch (error) {
       if (error.response.status === 400) {
@@ -42,6 +44,12 @@ const Shop = ({ setIsShopClicked, yourSelectedTrainer, handleClickedTrainer }) =
         <button onClick={() => setIsShopClicked(false)} className="back-to-start-screen-btn">
           Back to start screen
         </button>
+
+        <div className="your-amount-of-coins-container">
+          <img src="/images/coin.png" alt="A coin icon" />
+          <p>{yourSelectedTrainer?.coins}</p>
+        </div>
+        <img src={yourSelectedTrainer.profile_pic} className="your-trainer-avatar" />
 
         <div className="shop-container">
           {bags?.map((item) => {
@@ -71,6 +79,19 @@ const Shop = ({ setIsShopClicked, yourSelectedTrainer, handleClickedTrainer }) =
             <p>Your trainer does not have enough coins</p>
             <div onClick={() => setIsInsufficientCoins(false)} class="button">
               Dismiss
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isBoughtSuccessfully && (
+        <div className="error-modal">
+          <div className="error-modal-content">
+            <img src="https://100dayscss.com/codepen/checkmark-green.svg" width="44" height="38" />
+            <span class="title">Nice!</span>
+            <p>The item you bought has been successfully added to your bag!</p>
+            <div onClick={() => setIsBoughtSuccessfully(false)} class="ok-button">
+              Close
             </div>
           </div>
         </div>

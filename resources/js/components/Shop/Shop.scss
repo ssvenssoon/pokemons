@@ -94,6 +94,35 @@
   z-index: 1;
 }
 
+.your-trainer-avatar {
+  position: absolute;
+  top: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  right: 30px;
+  padding: 1px;
+}
+.your-amount-of-coins-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  right: 130px;
+  padding: 1px;
+  img {
+    width: 30px;
+  }
+  p {
+    color: #feeecc;
+    margin-left: 10px;
+  }
+}
+
 .error-modal-content {
   position: relative;
   width: 280px;
@@ -146,6 +175,20 @@
     &:hover {
       background: #ec3434;
     }
+  }
+  .ok-button {
+    position: absolute;
+    height: 40px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #62de9d;
+    color: #fff;
+    line-height: 40px;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
   }
 }
 
