@@ -3,11 +3,15 @@ import FightArena from "./components/FightArena/FightArena"
 import StartScreen from "./components/StartScreen/StartScreen"
 import GetNewPokemon from "./components/GetNewPokemon/GetNewPokemon"
 import ChooseTrainer from "./components/ChooseTrainer/ChooseTrainer"
+import CreateTrainer from "./components/CreateTrainer/CreateTrainer"
+import GetAllPokemons from "./components/GetAllPokemons/getAllPokemons"
 import Shop from "./components/Shop/Shop"
 import "./App.scss"
 
 const GameWrapper = () => {
   const [isFightStarted, setIsFightStarted] = useState(false)
+  const [isCreateTrainerClicked, setIsCreateTrainerClicked] = useState(false)
+  const [isGetAllPokemonsClicked, setIsGetAllPokemonsClicked] = useState(false)
   const [isGetPokemonClicked, setIsGetPokemonClicked] = useState(false)
   const [isGetChooseTrainerClicked, setIsChooseTrainerClicked] = useState(false)
   const [yourSelectedTrainer, setYourSelectedTrainer] = useState(false)
@@ -45,6 +49,14 @@ const GameWrapper = () => {
             handleClickedTrainer={handleClickedTrainer}
           />
         </div>
+      ) : isCreateTrainerClicked ? (
+        <div className="container">
+          <CreateTrainer setIsCreateTrainerClicked={setIsCreateTrainerClicked} />
+        </div>
+      ) : isGetAllPokemonsClicked ? (
+        <div className="container">
+          <GetAllPokemons setIsGetAllPokemonsClicked={setIsGetAllPokemonsClicked} />
+        </div>
       ) : (
         <div className="container">
           <StartScreen
@@ -57,6 +69,10 @@ const GameWrapper = () => {
             isGetChooseTrainerClicked={isGetChooseTrainerClicked}
             setIsShopClicked={setIsShopClicked}
             isShopClicked={isShopClicked}
+            setIsCreateTrainerClicked={setIsCreateTrainerClicked}
+            isCreateTrainerClicked={isCreateTrainerClicked}
+            setIsGetAllPokemonsClicked={setIsGetAllPokemonsClicked}
+            isGetAllPokemonsClicked={isGetAllPokemonsClicked}
           />
         </div>
       )}

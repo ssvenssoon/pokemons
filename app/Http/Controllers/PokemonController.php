@@ -7,11 +7,18 @@ use App\Models\Pokemon;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 
 class PokemonController extends Controller
 {
     public function index()
+    {
+        $pokemon = Pokemon::inRandomOrder()->limit(2)->with('moves')->get();
+        return response()->json([
+            'pokemon' => $pokemon
+        ], 200);
+    }
+
+    public function getAllPokemons()
     {
         $pokemon = Pokemon::inRandomOrder()->limit(2)->with('moves')->get();
         return response()->json([

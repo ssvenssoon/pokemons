@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Login
-Route::post('/auth/register', [AuthController::class, 'createUser']);
+Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/pokemon/{id}', [PokemonController::class, 'getSpecificPokemon']);
     Route::put('/pokemon/{id}', [PokemonController::class, 'update']);
     Route::put('/heal-pokemon/{id}', [PokemonController::class, 'heal']);
+    Route::get('/pokemons', [PokemonController::class, 'getAllPokemons']);
 
     // Moves
     Route::post('/moves', [MoveController::class, 'store']);
@@ -43,6 +44,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/trainers', [TrainerController::class, 'index']);
     Route::put('/trainers/{id}', [TrainerController::class, 'updateCoins']);
     Route::get('/get-trainer/{id}', [TrainerController::class, 'getTrainer']);
+    Route::post('/create-trainer', [TrainerController::class, 'createTrainer']);
 
     // Bags
     Route::get('/bags', [BagController::class, 'index']);

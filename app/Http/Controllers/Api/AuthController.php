@@ -8,10 +8,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -35,7 +32,6 @@ class AuthController extends Controller
         ])->withCookie($cookie);
     }
 
-    // login a user method
     public function login(LoginRequest $request)
     {
         $data = $request->validated();
@@ -57,7 +53,6 @@ class AuthController extends Controller
         ])->withCookie($cookie);
     }
 
-    // logout a user method
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
@@ -69,7 +64,6 @@ class AuthController extends Controller
         ])->withCookie($cookie);
     }
 
-    // get the authenticated user method
     public function user(Request $request)
     {
         return new UserResource($request->user());

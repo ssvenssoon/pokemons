@@ -23,9 +23,7 @@ export default function Login() {
         return <Navigate to="/game-wrapper" />
       }
     } catch (error) {
-      if (error.response.status === 401) {
-        setError(error.response.data.message)
-      }
+      setError(error.response.data.message)
     }
   }
 
@@ -42,7 +40,7 @@ export default function Login() {
                 />
               </svg>
             </label>
-            <input class="lf--input" type="email" name="email" id="email" placeholder="name@company.com" required />
+            <input class="lf--input" type="email" name="email" id="email" placeholder="name@example.com" required />
           </div>
           <div class="flex-row">
             <label class="lf--label" for="password">

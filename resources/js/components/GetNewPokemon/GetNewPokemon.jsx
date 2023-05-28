@@ -24,7 +24,7 @@ const GetNewPokemon = ({ setIsGetPokemonClicked }) => {
             moves: response.data.moves,
             sprite_from_front: response.data.sprites.front_default,
             sprite_from_back: response.data.sprites.back_default,
-            stats: response.data.stats[0].base_stat,
+            stats: response.data.stats[0].base_stat
           })
           .then((response) => {
             setOkResponse(response)
@@ -41,30 +41,20 @@ const GetNewPokemon = ({ setIsGetPokemonClicked }) => {
 
   return (
     <div className="get-pokemon-container">
-      <button
-        onClick={() => setIsGetPokemonClicked(false)}
-        className="back-to-start-screen-btn"
-      >
+      <button onClick={() => setIsGetPokemonClicked(false)} className="back-to-start-screen-btn">
         Back to start screen
       </button>
       <form onSubmit={handleSubmit}>
         <label>
           Enter pokémon name:
-          <input
-            type="text"
-            value={pokemonName}
-            onChange={(event) => setPokemonName(event.target.value)}
-          />
+          <input type="text" value={pokemonName} onChange={(event) => setPokemonName(event.target.value)} />
         </label>
         <button type="submit">Get Pokémon</button>
       </form>
       {pokemonData && (
         <div className="pokemon-data-container">
           <h2>{pokemonData?.name}</h2>
-          <img
-            src={pokemonData.sprites?.front_default}
-            alt={`${pokemonData?.name}`}
-          />
+          <img src={pokemonData.sprites?.front_default} alt={`${pokemonData?.name}`} />
         </div>
       )}
     </div>
