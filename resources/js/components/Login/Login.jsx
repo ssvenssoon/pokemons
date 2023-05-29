@@ -67,9 +67,6 @@ export default function Login() {
             Don't have an account yet? <Link to="/register">Sign up</Link>
           </p>
         </form>
-        <a class="lf--forgot" href="#">
-          Forgot password?
-        </a>
       </div>
     </>
   )

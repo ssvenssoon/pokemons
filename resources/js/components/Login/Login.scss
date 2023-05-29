@@ -63,7 +63,7 @@ body {
 
   @media screen and (min-width: 600px) {
     width: 50vw;
-    max-width: 15em;
+    max-width: 13em;
   }
 }
 
@@ -77,13 +77,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 0;
 
   background: $gray-light;
   cursor: pointer;
 }
 .lf--input {
   flex: 1;
-  padding: 1em;
+  padding: 15px;
   border: 0;
   color: $gray;
   font-size: 1rem;

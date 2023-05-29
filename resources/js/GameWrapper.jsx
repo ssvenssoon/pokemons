@@ -4,7 +4,7 @@ import StartScreen from "./components/StartScreen/StartScreen"
 import GetNewPokemon from "./components/GetNewPokemon/GetNewPokemon"
 import ChooseTrainer from "./components/ChooseTrainer/ChooseTrainer"
 import CreateTrainer from "./components/CreateTrainer/CreateTrainer"
-import GetAllPokemons from "./components/GetAllPokemons/getAllPokemons"
+import GetAllPokemons from "./components/GetAllPokemons/GetAllPokemons"
 import Shop from "./components/Shop/Shop"
 import "./App.scss"
 
@@ -55,7 +55,10 @@ const GameWrapper = () => {
         </div>
       ) : isGetAllPokemonsClicked ? (
         <div className="container">
-          <GetAllPokemons setIsGetAllPokemonsClicked={setIsGetAllPokemonsClicked} />
+          <GetAllPokemons
+            setIsGetAllPokemonsClicked={setIsGetAllPokemonsClicked}
+            yourSelectedTrainer={yourSelectedTrainer}
+          />
         </div>
       ) : (
         <div className="container">

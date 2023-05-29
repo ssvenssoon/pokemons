@@ -4,3 +4,15 @@
   margin-bottom: 20px;
   font-weight: bold;
 }
+
+.login-form-wrapper {
+  input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    border: 0px solid #ccc;
+    border-radius: 0px;
+    font-size: 14px;
+    margin-bottom: 0px;
+    background-color: #fff;
+  }
+}

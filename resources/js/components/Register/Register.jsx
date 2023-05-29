@@ -58,7 +58,7 @@ export default function Register() {
               />
             </svg>
           </label>
-          <input class="lf--input" type="text" name="name" id="name" placeholder="Jhone Doe" required />
+          <input class="lf--input name" type="text" name="name" id="name" placeholder="Jhone Doe" required />
         </div>
         {nameError && <p className="input-error">{nameError}</p>}
         <div class="flex-row">
@@ -70,7 +70,7 @@ export default function Register() {
               />
             </svg>
           </label>
-          <input class="lf--input" type="email" name="email" id="email" placeholder="name@company.com" required />
+          <input class="lf--input" type="email" name="email" id="email" placeholder="name@example.com" required />
         </div>
         {emailError && <p className="input-error">{emailError}</p>}
         <div class="flex-row">
@@ -104,12 +104,9 @@ export default function Register() {
           Register
         </button>
         <p className="switch-to-login-or-sign-up">
-          Do you already have an account? <Link to="/">Log in</Link>
+          Already have an account? <Link to="/">Log in</Link>
         </p>
       </form>
-      <a class="lf--forgot" href="#">
-        Forgot password?
-      </a>
     </div>
   )
 }

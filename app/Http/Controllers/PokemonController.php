@@ -6,7 +6,9 @@ use App\Models\Move;
 use App\Models\Pokemon;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class PokemonController extends Controller
 {
@@ -18,11 +20,12 @@ class PokemonController extends Controller
         ], 200);
     }
 
-    public function getAllPokemons()
+    public function getAllPokemons(Request $request)
     {
-        $pokemon = Pokemon::inRandomOrder()->limit(2)->with('moves')->get();
+        $pokemons = Pokemon::paginate(10);
+
         return response()->json([
-            'pokemon' => $pokemon
+            'pokemons' => $pokemons
         ], 200);
     }
 
@@ -125,5 +128,15 @@ class PokemonController extends Controller
             'message' => "Pokemon's health updated successfully.",
             'data' => $pokemon
         ]);
+    }
+
+    public function addPokemonToTrainer($pokemonId, $trainerId)
+    {
+        $pokemon = Pokemon::find($pokemonId);
+        $pokemon->trainers()->attach($trainerId);
+
+        return response()->json([
+            'message' => 'Pokemon added to trainer successfully',
+        ], 200);
     }
 }
