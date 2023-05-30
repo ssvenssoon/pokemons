@@ -64,7 +64,6 @@ class PokemonController extends Controller
 
             $newPokemon->save();
 
-            // Create new Guzzle client instance
             $client = new Client();
 
 
@@ -72,14 +71,12 @@ class PokemonController extends Controller
                 $moveName = $move['move']['name'];
                 $moveUrl = $move['move']['url'];
 
-                // Check if move data is already cached
                 $moveApiResponse = Cache::get($moveUrl);
 
                 if (!$moveApiResponse) {
                     $response = $client->get($moveUrl);
                     $moveApiResponse = $response->getBody()->getContents();
 
-                    // Cache move data for future requests
                     Cache::put($moveUrl, $moveApiResponse, now()->addHours(24));
                 }
 
