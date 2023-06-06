@@ -37,7 +37,6 @@ const CreateTrainer = ({ setIsCreateTrainerClicked }) => {
         setName("")
         setAge("")
         setImage("")
-        console.log(response)
       })
       .catch((error) => {
         setErrorMessage("Failed to create the trainer.")

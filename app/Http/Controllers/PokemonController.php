@@ -66,7 +66,6 @@ class PokemonController extends Controller
 
             $client = new Client();
 
-
             foreach ($moves as $move) {
                 $moveName = $move['move']['name'];
                 $moveUrl = $move['move']['url'];
